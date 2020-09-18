@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.fiap.business.LojaBusiness;
+import br.com.fiap.exception.ReponseBusinessException;
 import br.com.fiap.model.LojaModel;
 import br.com.fiap.repository.LojaRepository;
 
@@ -25,6 +27,9 @@ import br.com.fiap.repository.LojaRepository;
 public class LojaController {
 	@Autowired
 	public LojaRepository lojaRepository;
+	
+	@Autowired
+	public LojaBusiness lojaBusiness;
 
 	@GetMapping()
 	public ResponseEntity<List<LojaModel>> findAll() {
@@ -41,7 +46,9 @@ public class LojaController {
 	}
 
 	@PostMapping()
-	public ResponseEntity save(@RequestBody @Valid LojaModel lojaModel) {
+	public ResponseEntity save(@RequestBody @Valid LojaModel lojaModel) throws ReponseBusinessException {
+		
+		lojaBusiness.applyBusiness(lojaModel);
 
 		lojaRepository.save(lojaModel);
 
@@ -51,8 +58,10 @@ public class LojaController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity update(@PathVariable("id") long id, @RequestBody @Valid LojaModel lojaModel) {
+	public ResponseEntity update(@PathVariable("id") long id, @RequestBody @Valid LojaModel lojaModel) throws ReponseBusinessException {
 
+		lojaBusiness.applyBusiness(lojaModel);
+		
 		lojaModel.setIdLoja(id);
 		lojaRepository.save(lojaModel);
 		

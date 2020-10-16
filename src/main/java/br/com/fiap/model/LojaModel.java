@@ -1,10 +1,13 @@
 package br.com.fiap.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -17,6 +20,7 @@ public class LojaModel {
 	private long idLoja;
 	private String nomeLoja;
 	private String urlLoja;
+	private List<ProdutoModel> produtos;
 
 	public LojaModel() {
 	}
@@ -62,6 +66,15 @@ public class LojaModel {
 		this.urlLoja = urlLoja;
 	}
 
+	@OneToMany(mappedBy = "loja")
+	public List<ProdutoModel> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<ProdutoModel> produtos) {
+		this.produtos = produtos;
+	}
+	
 	
 
 }

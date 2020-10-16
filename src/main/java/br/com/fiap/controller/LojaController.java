@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.fiap.business.LojaBusiness;
+import br.com.fiap.consumer.ProdutoConsumer;
 import br.com.fiap.exception.ReponseBusinessException;
 import br.com.fiap.model.LojaModel;
 import br.com.fiap.repository.LojaRepository;
